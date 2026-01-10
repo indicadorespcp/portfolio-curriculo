@@ -212,12 +212,44 @@
     body::-webkit-scrollbar {
       display: none;
     }
+
+.btn-curriculo {
+  position: fixed;
+  top: -80px;
+  left: -40px;
+  width: 220px;   /* TAMANHO DO SELO */
+  height: 220px;
+  z-index: 9999;
+}
+
+
+.btn-curriculo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+  filter: drop-shadow(0 0 8px rgba(0,0,0,.6));
+  transition: transform .25s ease;
+}
+
+.btn-curriculo img:hover {
+  transform: scale(1.12);
+}
+
+
+
+    
   </style>
 </head>
 
 <body>
 
 <button id="fullscreenBtn">⛶</button>
+
+<a href="curriculo.pdf" target="_blank" class="btn-curriculo">
+  <img src="curriculo.png" alt="Currículo">
+</a>
+
 
 <header>
   <img src="foto.jpg.jpg" style="width:140px;height:140px;border-radius:50%;border:4px solid #93c5fd;margin-bottom:15px;">
@@ -248,8 +280,11 @@ const projetos = [
   { titulo:"Vendas", descricao:"Performance e Metas.", imagem:"vendas.png", link:"https://app.powerbi.com/view?r=eyJrIjoiMjkyY2RiYmItZGE3Ny00M2Y0LTkyNzEtMTZhODI3OTBhMGZjIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"},
   { titulo:"Análise de Combustivel", descricao:"Controle de Consumo Mês Atual x Mês Anterior.", imagem:"combustivel.png", link:"https://app.powerbi.com/view?r=eyJrIjoiYTQ2MjFlOTQtZGFkOS00OWJhLTlhZmItNTkxMTJlNGE0NjE2IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"},
   { titulo:"Análise Comercial", descricao:"Análise de Vendas Mês Atual x Mês Anterior.", imagem:"analisecomercial.png", link:"https://app.powerbi.com/view?r=eyJrIjoiY2VhY2VlMGUtYWJlNS00MTUwLTlhMWUtZDNkZmM2ZWMzZDhhIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"},
-  { titulo:"Financeiro com DRE", descricao:"Painel financeiro focado em DRE, oferecendo visão clara.", imagem:"drefinanceiro.png", link:"https://app.powerbi.com/view?r=eyJrIjoiNmNmOGRmZDQtZGJiNy00MjU3LThlYjItMDY2NjYwNDIwZjllIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"}
+  { titulo:"Financeiro com DRE", descricao:"Painel financeiro focado em DRE, oferecendo visão clara.", imagem:"drefinanceiro.png", link:"https://app.powerbi.com/view?r=eyJrIjoiNmNmOGRmZDQtZGJiNy00MjU3LThlYjItMDY2NjYwNDIwZjllIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"},
+
 ];
+
+
 
 
 
@@ -263,14 +298,24 @@ projetos.slice(3).forEach(p => criarCard(p, grupoB));
 function criarCard(p, container){
   const card = document.createElement("div");
   card.className = "card";
+
+  const selo = p.titulo === "Currículo"
+    ? `<div class="selo-curriculo"></div>`
+    : "";
+
   card.innerHTML = `
+    ${selo}
     <div class="image-box"><img src="${p.imagem}"></div>
     <h3>${p.titulo}</h3>
     <p>${p.descricao}</p>
-    <div class="card-footer"><a href="${p.link}" target="_blank">Abrir Dashboard</a></div>
+    <div class="card-footer">
+      <a href="${p.link}" target="_blank">Abrir</a>
+    </div>
   `;
+
   container.appendChild(card);
 }
+
 
 const observer = new IntersectionObserver(
   ([e]) => document.querySelector(".grupo-a")
