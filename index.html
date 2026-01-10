@@ -282,12 +282,13 @@ const projetos = [
   { titulo:"Análise Comercial", descricao:"Análise de Vendas Mês Atual x Mês Anterior.", imagem:"analisecomercial.png", link:"https://app.powerbi.com/view?r=eyJrIjoiY2VhY2VlMGUtYWJlNS00MTUwLTlhMWUtZDNkZmM2ZWMzZDhhIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"},
   { titulo:"Financeiro com DRE", descricao:"Painel financeiro focado em DRE, oferecendo visão clara.", imagem:"drefinanceiro.png", link:"https://app.powerbi.com/view?r=eyJrIjoiNmNmOGRmZDQtZGJiNy00MjU3LThlYjItMDY2NjYwNDIwZjllIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"},
 
+  {
+    titulo: "Dashboard em Excel",
+    descricao: "Dashboard financeiro desenvolvido em Excel para análise e visualização de dados.",
+    imagem: "dreexcel.png",
+    link: "https://1drv.ms/x/c/5b956d6c894d24fb/IQAbrWH6sRiAQpBSYo6eDo2iAWX-lJkmJm_ybuEa_q3VUaE?e=XaNhea"
+  }
 ];
-
-
-
-
-
 
 const grupoA = document.getElementById("grupoA");
 const grupoB = document.getElementById("grupoB");
@@ -316,7 +317,6 @@ function criarCard(p, container){
   container.appendChild(card);
 }
 
-
 const observer = new IntersectionObserver(
   ([e]) => document.querySelector(".grupo-a")
     .classList.toggle("recuado", e.isIntersecting),
@@ -325,13 +325,13 @@ const observer = new IntersectionObserver(
 
 observer.observe(grupoB);
 
-
 document.getElementById("fullscreenBtn").onclick = () => {
   document.fullscreenElement
     ? document.exitFullscreen()
     : document.documentElement.requestFullscreen();
 };
 </script>
+
 
 </body>
 </html>
