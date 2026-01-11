@@ -197,6 +197,40 @@ transition:.25s;
   pointer-events: none;
 }
 
+.video-avatar .play-text{
+  position:absolute;
+  bottom:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:12px;
+  letter-spacing:1px;
+  padding:6px 30px;
+  background:rgba(0,0,0,.55);
+  color:#e5e7eb;
+  border-radius:20px;
+  z-index:4;
+  backdrop-filter:blur(6px);
+  pointer-events:none;
+  text-transform:uppercase;
+
+  white-space: nowrap;
+  letter-spacing: 2px;
+  width: fit-content;   /* ⬅ FUNDO AJUSTA AO TEXTO */
+}
+
+
+/* COLE AQUI EMBAIXO 👇 */
+.video-avatar:hover .play-text{
+  background:rgba(37,99,235,.85);
+  transform:translateX(-50%) scale(1.05);
+}
+
+.video-avatar{
+  cursor:pointer;
+}
+
+
+
 
 </style>
 </head>
@@ -215,6 +249,8 @@ transition:.25s;
 <iframe src="https://www.youtube.com/embed/5TLM6WUDZT0?autoplay=1&mute=1&loop=1&playlist=5TLM6WUDZT0&controls=0&showinfo=0"></iframe>
 <img src="foto.jpg.jpg" class="foto">
 <img src="filme.png" class="moldura">
+<span class="play-text">VIDEO DE APRESENTACAO</span>
+
 </a>
 
 <h1>Portfólio Análise de Dados</h1>
