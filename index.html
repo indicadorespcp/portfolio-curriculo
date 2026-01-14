@@ -5,8 +5,11 @@
 <title>Portfólio Análise de Dados | Adriano Moura</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
 
 body{
 font-family:Arial,Helvetica,sans-serif;
@@ -257,6 +260,41 @@ transition:.25s;
   filter:drop-shadow(0 0 8px #2563eb);
 }
 
+.nome{
+  margin-top:6px;
+  font-size:2rem;                 
+  color:#e0f2fe;
+  font-weight:400;
+  letter-spacing:1px;            
+  text-transform:none;           
+  text-shadow:0 0 12px rgba(59,130,246,.35);
+  font-family:'Montserrat', sans-serif;
+}
+
+/* logo do tipo do projeto */
+.card .logo-tipo{
+  position:absolute;
+  top:8px; /* ⬅ vertical (sobe / desce) — NÃO mexa */
+  left:5px; /* ⬅ horizontal (esquerda / direita) — É AQUI */
+  width:34px;
+  height:34px;
+  background:#020617;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:5;
+  box-shadow:0 0 10px rgba(0,0,0,.6);
+}
+
+.card .logo-tipo img{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+}
+
+
+
 
 
 </style>
@@ -281,6 +319,8 @@ transition:.25s;
 </a>
 
 <h1>Portfólio Análise de Dados</h1>
+<p class="nome">Seu Nome Aqui</p>
+
 <div class="scroller">
 <span>Dashboards profissionais • DAX • Linguagem M • Power Query • Modelagem de Dados • ETL • Python • n8n • Análise de Dados •</span>
 </div>
@@ -318,6 +358,7 @@ const projetos = [
 
   { 
     titulo:"DRE Avançada",
+    tipo:"powerbi",
     descricao:"Dashboard financeiro com DRE dinâmica, indicadores e análise gerencial.",
     imagem:"dre.png",
     link:"https://app.powerbi.com/view?r=eyJrIjoiYjAwNjZhOTAtMDFmYy00OGZmLTk2MTItNGE2MzIxMDMyMmQ0IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
@@ -325,13 +366,23 @@ const projetos = [
 
   {
     titulo:"Comercial",
+    tipo:"powerbi",
     descricao:"Análise Comercial, metas e resultados.",
     imagem:"comercial.png",
     link:"https://app.powerbi.com/view?r=eyJrIjoiMmE3MTk4ZmUtYmYyOS00NmRmLTg0MzgtYWU1OTY2NzU4YTI1IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
   },
 
   {
+    titulo:"Dashboard em Excel",
+    tipo:"excel",
+    descricao:"Dashboard financeiro desenvolvido em Excel.",
+    imagem:"dreexcel.png",
+    link:"https://1drv.ms/x/c/5b956d6c894d24fb/IQAbrWH6sRiAQpBSYo6eDo2iAWX-lJkmJm_ybuEa_q3VUaE?e=XaNhea"
+  },
+
+  {
     titulo:"Recursos Humanos",
+    tipo:"powerbi",
     descricao:"Indicadores de RH, turnover e headcount.",
     imagem:"RH.png",
     link:"https://app.powerbi.com/view?r=eyJrIjoiNDAzZWMwNTItZDZkZi00ODc3LTg2OWItMGJjMGIzNDlkMGIzIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
@@ -339,6 +390,7 @@ const projetos = [
 
   {
     titulo:"Pokémon",
+    tipo:"powerbi",
     descricao:"Batalha de Poderes.",
     imagem:"pokemon.png",
     link:"https://app.powerbi.com/view?r=eyJrIjoiZmU2MGJkZTAtZTM3MC00MGViLWE5OWQtZjYyZTIyNWFmYjQ2IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
@@ -346,6 +398,7 @@ const projetos = [
 
   {
     titulo:"Vendas",
+    tipo:"powerbi",
     descricao:"Performance e Metas.",
     imagem:"vendas.png",
     link:"https://app.powerbi.com/view?r=eyJrIjoiMjkyY2RiYmItZGE3Ny00M2Y0LTkyNzEtMTZhODI3OTBhMGZjIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
@@ -353,6 +406,7 @@ const projetos = [
 
   {
     titulo:"Análise de Combustivel",
+    tipo:"powerbi",
     descricao:"Controle de Consumo Mês Atual x Mês Anterior.",
     imagem:"combustivel.png",
     link:"https://app.powerbi.com/view?r=eyJrIjoiYTQ2MjFlOTQtZGFkOS00OWJhLTlhZmItNTkxMTJlNGE0NjE2IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
@@ -360,6 +414,7 @@ const projetos = [
 
   {
     titulo:"Análise Comercial",
+    tipo:"powerbi",
     descricao:"Análise de Vendas Mês Atual x Mês Anterior.",
     imagem:"analisecomercial.png",
     link:"https://app.powerbi.com/view?r=eyJrIjoiY2VhY2VlMGUtYWJlNS00MTUwLTlhMWUtZDNkZmM2ZWMzZDhhIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
@@ -367,16 +422,10 @@ const projetos = [
 
   {
     titulo:"Financeiro com DRE",
+    tipo:"powerbi",
     descricao:"Painel financeiro focado em DRE, oferecendo visão clara.",
     imagem:"drefinanceiro.png",
     link:"https://app.powerbi.com/view?r=eyJrIjoiNmNmOGRmZDQtZGJiNy00MjU3LThlYjItMDY2NjYwNDIwZjllIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
-  },
-
-  {
-    titulo:"Dashboard em Excel",
-    descricao:"Dashboard financeiro desenvolvido em Excel.",
-    imagem:"dreexcel.png",
-    link:"https://1drv.ms/x/c/5b956d6c894d24fb/IQAbrWH6sRiAQpBSYo6eDo2iAWX-lJkmJm_ybuEa_q3VUaE?e=XaNhea"
   }
 
 ];
@@ -389,16 +438,32 @@ projetos.slice(0,3).forEach(p=>criarCard(p,grupoA));
 projetos.slice(3).forEach(p=>criarCard(p,grupoB));
 
 function criarCard(p,container){
-const card=document.createElement("div");
-card.className="card";
-card.innerHTML=`
+
+const logos = {
+  powerbi: "powerbi.png",
+  excel: "excel.png",
+  python: "python.png",
+  sql: "sql.png"
+};
+
+const logoHTML = p.tipo 
+  ? `<div class="logo-tipo"><img src="${logos[p.tipo]}"></div>` 
+  : "";
+
+const card = document.createElement("div");
+card.className = "card";
+
+card.innerHTML = `
+${logoHTML}
 <div class="image-box"><img src="${p.imagem}"></div>
 <h3>${p.titulo}</h3>
 <p>${p.descricao}</p>
 <div class="card-footer"><a href="${p.link}" target="_blank">Abrir</a></div>
 `;
+
 container.appendChild(card);
 }
+
 
 const observer=new IntersectionObserver(
 ([e])=>document.querySelector(".grupo-a").classList.toggle("recuado",e.isIntersecting),
