@@ -1,299 +1,434 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8" />
-<title>Portfólio Análise de Dados | Adriano Moura</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+  <head>
+  <meta charset="UTF-8" />
+  <title>Portfólio Análise de Dados | Adriano Moura</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:#0f172a;
-color:#e5e7eb;
-}
-
-header{
-position:sticky;
-top:0;
-z-index:1000;
-padding:30px 20px;
-text-align:center;
-background:linear-gradient(135deg,#2563eb,#1e40af);
-}
-
-header h1{font-size:2.2rem}
-
-.scroller{width:100%;overflow:hidden;margin-top:10px}
-.scroller span{
-display:inline-block;
-white-space:nowrap;
-padding-left:100%;
-color:#dbeafe;
-animation:scrollText 15s linear infinite
-}
-@keyframes scrollText{
-0%{transform:translateX(0)}
-100%{transform:translateX(-100%)}
-}
-
-main{max-width:1200px;margin:40px auto;padding:0 20px 120px}
-
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
-
-.grupo-a{transition:transform .4s ease,opacity .4s ease}
-.grupo-a.recuado{transform:translateY(-40px) scale(.95);opacity:0;pointer-events:none}
-.grupo-b{margin-top:50px}
-
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
-
-.card{
-position:relative;
-border-radius:16px;
-background:#020617;
-padding:14px;
-display:flex;
-flex-direction:column;
-}
-
-.card::before{
-content:"";
-position:absolute;
-inset:-2px;
-border-radius:18px;
-background:linear-gradient(270deg,#2563eb,#22d3ee,#6366f1,#2563eb);
-background-size:400% 400%;
-animation:borderAnim 6s linear infinite;
-z-index:-1;
-}
-
-@keyframes borderAnim{
-0%{background-position:0% 50%}
-100%{background-position:400% 50%}
-}
-
-.card:hover{transform:translateY(-6px);transition:.3s}
-
-.image-box{
-width:100%;
-height:220px;
-margin-bottom:12px;
-background:#020617;
-border-radius:12px;
-overflow:hidden;
-}
-
-.image-box img{width:100%;height:100%;object-fit:contain}
-
-.card h3{margin:10px 0;color:#93c5fd}
-.card p{font-size:.95rem;line-height:1.5;margin-bottom:15px;color:#cbd5f5}
-
-.card-footer{margin-top:auto;padding-top:10px;display:flex;justify-content:center}
-.card-footer a{
-width:100%;
-max-width:220px;
-text-decoration:none;
-text-align:center;
-padding:10px;
-border-radius:8px;
-background:#2563eb;
-color:#fff;
-font-weight:bold;
-transition:.3s;
-}
-.card-footer a:hover{background:#1d4ed8}
-
-footer{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-text-align:center;
-padding:15px 20px;
-font-size:.9rem;
-color:#94a3b8;
-background:#020617;
-z-index:999;
-}
-
-#fullscreenBtn{
-position:fixed;
-top:20px;
-right:20px;
-z-index:9999;
-width:44px;
-height:44px;
-border:none;
-border-radius:10px;
-background:#2563eb;
-color:#fff;
-font-size:20px;
-cursor:pointer;
-box-shadow:0 4px 12px rgba(0,0,0,.4);
-transition:.3s;
-}
-#fullscreenBtn:hover{background:#1d4ed8;transform:scale(1.05)}
-
-html,body{scrollbar-width:none;-ms-overflow-style:none}
-html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
-
-/* selo curriculo */
-.btn-curriculo{
-position:fixed;
-top:-80px;
-left:-40px;
-width:220px;
-height:220px;
-z-index:9999;
-}
-.btn-curriculo img{
-width:100%;
-height:100%;
-object-fit:contain;
-cursor:pointer;
-filter:drop-shadow(0 0 8px rgba(0,0,0,.6));
-transition:.25s;
-}
-.btn-curriculo img:hover{transform:scale(1.12)}
-
-.video-avatar{
-  position: relative;
-  width: 140px;
-  height: 160px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  display: block;
-}
+  <style>
+  *{box-sizing:border-box;margin:0;padding:0}
 
 
-.video-avatar iframe,
-.video-avatar .foto{
-  position: absolute;
-  top: 20px;
-  left: 9px;
-  width: calc(100% - 30px);
-  height: calc(100% - 30px);
-  border-radius: 0;
-  object-fit: cover;
-}
-
-.video-avatar iframe{
-  z-index: 1;
-}
-
-.video-avatar .foto{
-  z-index: 2;
-}
-
-.video-avatar .moldura{
-  position: absolute;
-  top: -14px;
-  left: -14px;
-  width: calc(100% + 15px);
-  height: calc(100% + 40px);
-  z-index: 3;
-  pointer-events: none;
-}
-
-.video-avatar .play-text{
-  position:absolute;
-  bottom:-10px;
-  left:49%;
-  transform:translateX(-50%);
-  font-size:12px;
-  letter-spacing:1px;
-  padding:6px 30px;
-  background:rgba(0,0,0,.55);
+  body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#0f172a;
   color:#e5e7eb;
-  border-radius:20px;
-  z-index:4;
-  backdrop-filter:blur(6px);
-  pointer-events:none;
-  text-transform:uppercase;
+  }
 
-  white-space: nowrap;
-  letter-spacing: 2px;
-  width: fit-content;   /* ⬅ FUNDO AJUSTA AO TEXTO */
+ header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  padding:30px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#2563eb,#1e40af);
+}
+
+/* LINHA ELEGANTE DO HEADER */
+header::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:2px;
+  background:linear-gradient(
+    90deg,
+    rgba(255,255,255,.05),
+    rgba(147,197,253,.8),
+    rgba(255,255,255,.05)
+  );
+  box-shadow:0 0 12px rgba(59,130,246,.6);
 }
 
 
-.video-avatar:hover .play-text{
-  background:rgba(37,99,235,.85);
-  transform:translateX(-50%) scale(1.05);
+  header h1{font-size:2.2rem}
+
+  .scroller{width:100%;overflow:hidden;margin-top:10px}
+  .scroller span{
+  display:inline-block;
+  white-space:nowrap;
+  padding-left:100%;
+  color:#dbeafe;
+  animation:scrollText 15s linear infinite
+  }
+  @keyframes scrollText{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-100%)}
+  }
+
+  main{max-width:1200px;margin:40px auto;padding:0 20px 120px}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+
+
+
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+
+  .card{
+  position:relative;
+  border-radius:16px;
+  background:#020617;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  }
+
+  .card::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:18px;
+    background:linear-gradient(270deg,#171A4A,#000020,#0303b5,#2F2C79);
+    background-size:400% 400%;
+    animation:borderAnim 6s linear infinite;
+    z-index:-1;
+
+    opacity:0;                 /* 🔴 INVISÍVEL por padrão */
+    transition:opacity .3s ease;
+  }
+
+  /* MOSTRA O EFEITO DE LUZ AO PASSAR O MOUSE */
+.card:hover::before{
+  opacity:1;
 }
 
-.video-avatar{
-  cursor:pointer;
-}
 
-.social-footer{
+
+  @keyframes borderAnim{
+  0%{background-position:0% 50%}
+  100%{background-position:400% 50%}
+  }
+
+  .card:hover{transform:translateY(-6px);transition:.3s}
+
+  .image-box{
+  width:100%;
+  height:220px;
+  margin-bottom:12px;
+  background:#020617;
+  border-radius:12px;
+  overflow:hidden;
+  }
+
+  .image-box img{width:100%;height:100%;object-fit:contain}
+
+  .card h3{margin:10px 0;color:#93c5fd}
+  .card p{font-size:.95rem;line-height:1.5;margin-bottom:15px;color:#cbd5f5}
+
+  .card-footer{margin-top:auto;padding-top:10px;display:flex;justify-content:center}
+  .card-footer a{
+  width:100%;
+  max-width:220px;
+  text-decoration:none;
+  text-align:center;
+  padding:10px;
+  border-radius:8px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:bold;
+  transition:.3s;
+  }
+  .card-footer a:hover{background:#1d4ed8}
+
+  footer{
   position:fixed;
   bottom:0;
   left:0;
   width:100%;
-  height:70px;
+  text-align:center;
+  padding:15px 20px;
+  font-size:.9rem;
+  color:#94a3b8;
   background:#020617;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:30px;
   z-index:999;
-}
+  }
 
-.social-footer img{
-  width:32px;
-  height:32px;
-  object-fit:contain;
-  opacity:.8;
-  transition:.3s;
+  #fullscreenBtn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:9999;
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:10px;
+  background:#2563eb;
+  color:#fff;
+  font-size:20px;
   cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.4);
+  transition:.3s;
+  }
+  #fullscreenBtn:hover{background:#1d4ed8;transform:scale(1.05)}
+
+  html,body{scrollbar-width:none;-ms-overflow-style:none}
+  html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
+
+  /* selo curriculo */
+  .btn-curriculo{
+  position:fixed;
+  top:-80px;
+  left:-40px;
+  width:220px;
+  height:220px;
+  z-index:9999;
+  }
+  .btn-curriculo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  cursor:pointer;
+  filter:drop-shadow(0 0 8px rgba(0,0,0,.6));
+  transition:.25s;
+  }
+  .btn-curriculo img:hover{transform:scale(1.12)}
+
+  .video-avatar{
+    position: relative;
+    width: 140px;
+    height: 160px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: block;
+  }
+
+
+  .video-avatar iframe,
+  .video-avatar .foto{
+    position: absolute;
+    top: 20px;
+    left: 9px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    border-radius: 0;
+    object-fit: cover;
+  }
+
+  .video-avatar iframe{
+    z-index: 1;
+  }
+
+  .video-avatar .foto{
+    z-index: 2;
+  }
+
+  .video-avatar .moldura{
+    position: absolute;
+    top: -14px;
+    left: -14px;
+    width: calc(100% + 15px);
+    height: calc(100% + 40px);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .video-avatar .play-text{
+    position:absolute;
+    bottom:-10px;
+    left:49%;
+    transform:translateX(-50%);
+    font-size:12px;
+    letter-spacing:1px;
+    padding:6px 30px;
+    background:rgba(0,0,0,.55);
+    color:#e5e7eb;
+    border-radius:20px;
+    z-index:4;
+    backdrop-filter:blur(6px);
+    pointer-events:none;
+    text-transform:uppercase;
+
+    white-space: nowrap;
+    letter-spacing: 2px;
+    width: fit-content;   /* ⬅ FUNDO AJUSTA AO TEXTO */
+  }
+
+
+  .video-avatar:hover .play-text{
+    background:rgba(37,99,235,.85);
+    transform:translateX(-50%) scale(1.05);
+  }
+
+  .video-avatar{
+    cursor:pointer;
+  }
+
+  .social-footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:70px;
+    background:#020617;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+    z-index:999;
+  }
+
+  .social-footer img{
+    width:32px;
+    height:32px;
+    object-fit:contain;
+    opacity:.8;
+    transition:.3s;
+    cursor:pointer;
+  }
+
+  .social-footer img:hover{
+    transform:scale(1.2);
+    opacity:1;
+    filter:drop-shadow(0 0 8px #2563eb);
+  }
+
+  .nome{
+    margin-top:6px;
+    font-size:2rem;                 
+    color:#e0f2fe;
+    font-weight:400;
+    letter-spacing:1px;            
+    text-transform:none;           
+    text-shadow:0 0 12px rgba(59,130,246,.35);
+    font-family:'Montserrat', sans-serif;
+  }
+
+  /* logo do tipo do projeto */
+  .card .logo-tipo{
+    position:absolute;
+    top:8px; /* ⬅ vertical (sobe / desce) — NÃO mexa */
+    left:5px; /* ⬅ horizontal (esquerda / direita) — É AQUI */
+    width:34px;
+    height:34px;
+    background:#020617;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:5;
+    box-shadow:0 0 10px rgba(0,0,0,.6);
+  }
+
+  .card .logo-tipo img{
+    width:200px;
+    height:90px;
+    object-fit:contain;
+  }
+
+  /* animação suave da logo */
+  .card .logo-tipo img{
+    transition: transform .3s ease, filter .3s ease;
+  }
+
+  /* quando passar o mouse no card, só a logo reage */
+  .card:hover .logo-tipo img{
+    transform: scale(1.35);
+    filter: drop-shadow(0 0 12px rgba(59,130,246,.8));
+  }
+
+
+  .card{
+    background:#020617;                  /* cinza escuro elegante */
+    border:1px solid rgba(255,255,255,.06);
+    box-shadow:0 10px 40px rgba(0,0,0,.4);
+    transition: 
+      transform .25s ease-out,
+      border .3s ease,
+      box-shadow .3s ease,
+      background .3s ease;
+  }
+
+.certificados{
+  max-width:1200px;
+  margin:60px auto 120px;
+  padding:0 20px;
 }
 
-.social-footer img:hover{
-  transform:scale(1.2);
-  opacity:1;
-  filter:drop-shadow(0 0 8px #2563eb);
+.certificados h2{
+  font-size:1.6rem;
+  color:#93c5fd;
+  margin-bottom:25px;
+  text-align:center;
+  letter-spacing:1px;
 }
 
-.nome{
-  margin-top:6px;
-  font-size:2rem;                 
-  color:#e0f2fe;
-  font-weight:400;
-  letter-spacing:1px;            
-  text-transform:none;           
-  text-shadow:0 0 12px rgba(59,130,246,.35);
-  font-family:'Montserrat', sans-serif;
-}
-
-/* logo do tipo do projeto */
-.card .logo-tipo{
-  position:absolute;
-  top:8px; /* ⬅ vertical (sobe / desce) — NÃO mexa */
-  left:5px; /* ⬅ horizontal (esquerda / direita) — É AQUI */
-  width:34px;
-  height:34px;
-  background:#020617;
-  border-radius:8px;
+.certificados-grid{
   display:flex;
+  gap:25px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* botão fixo de certificados */
+.btn-fixo-certificados{
+  position:fixed;
+  right:-10px;
+  bottom:30px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  z-index:9999;
+}
+
+/* imagem do botão */
+.btn-fixo-certificados img{
+  width:150px;          /* ⬅ tamanho do botão */
+  height:auto;
+  transition:transform .3s ease, filter .3s ease;
+}
+
+/* efeito elegante ao passar o mouse */
+.btn-fixo-certificados:hover img{
+  transform:scale(1.1);
+  filter:drop-shadow(0 0 12px rgba(59,130,246,.8));
+}
+
+
+html{
+  overflow-x:hidden;
+}
+
+/* modal escondido */
+.modal-certificados{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.75);
+  backdrop-filter:blur(6px);
+  display:none;
   align-items:center;
   justify-content:center;
-  z-index:5;
-  box-shadow:0 0 10px rgba(0,0,0,.6);
+  z-index:9999;
 }
 
-.card .logo-tipo img{
-  width:90px;
-  height:90px;
-  object-fit:contain;
+/* modal visível */
+.modal-certificados.ativo{
+  display:flex;
 }
 
+/* conteúdo do modal */
+.modal-conteudo{
+  background:#020617;
+  padding:30px;
+  border-radius:16px;
+  max-width:420px;
+  width:90%;
+  box-shadow:0 0 40px rgba(0,0,0,.6);
+  text-align:center;
+}
 
+/* botão fechar */
+.fechar-modal{
+  position:absolute;
+  top:14px;
+  right:18px;
+  cursor:pointer;
+  font-size:20px;
+  color:#93c5fd;
+}
 
 
 
@@ -302,197 +437,272 @@ transition:.25s;
 
 <body>
 
-<button id="fullscreenBtn">⛶</button>
+  <!-- BOTÕES -->
+  <button id="fullscreenBtn">⛶</button>
 
-<a href="curriculo.pdf" target="_blank" class="btn-curriculo">
-<img src="curriculo.png">
-</a>
+  <button class="btn-fixo-certificados">
+    <img src="certificados.png" alt="Certificados">
+  </button>
 
-<header>
+  <!-- MODAL CERTIFICADOS -->
+  <div class="modal-certificados" id="modalCertificados">
+    <div class="modal-conteudo">
+      <span class="fechar-modal" id="fecharCertificados">✕</span>
 
-<a href="https://www.youtube.com/watch?v=5TLM6WUDZT0" target="_blank" class="video-avatar">
-<iframe src="https://www.youtube.com/embed/5TLM6WUDZT0?autoplay=1&mute=1&loop=1&playlist=5TLM6WUDZT0&controls=0&showinfo=0"></iframe>
-<img src="foto.jpg.jpg" class="foto">
-<img src="filme.png" class="moldura">
-<span class="play-text">VIDEO DE APRESENTACAO</span>
+      <h2>📜 Certificados</h2>
+      <ul class="lista-certificados">
+        <li><a href="certificados/fundamentos-dax.pdf" target="_blank">Fundamentos DAX</a></li>
+        <li><a href="certificados/power-bi-pro.pdf" target="_blank">Power BI Profissional</a></li>
+        <li><a href="certificados/python-analise-dados.pdf" target="_blank">Python para Análise de Dados</a></li>
+      </ul>
+    </div>
+  </div>
 
-</a>
 
-<h1>Portfólio Análise de Dados</h1>
-<p class="nome">Seu Nome Aqui</p>
 
-<div class="scroller">
-<span>Dashboards profissionais • DAX • Linguagem M • Power Query • Modelagem de Dados • ETL • Python • n8n • Análise de Dados •</span>
-</div>
 
-</header>
 
-<main>
-<section class="grid grupo-a" id="grupoA"></section>
-<section class="grid grupo-b" id="grupoB"></section>
-</main>
 
-<footer class="social-footer">
-  <a href="https://www.linkedin.com/" target="_blank">
-    <img src="linkedin.png" alt="LinkedIn">
+
+
+  <a href="curriculo.pdf" target="_blank" class="btn-curriculo">
+  <img src="curriculo.png">
   </a>
 
-  <a href="https://www.instagram.com/" target="_blank">
-    <img src="instagram.png" alt="Instagram">
+  <header>
+
+  <a href="https://www.youtube.com/watch?v=5TLM6WUDZT0" target="_blank" class="video-avatar">
+  <iframe src="https://www.youtube.com/embed/5TLM6WUDZT0?autoplay=1&mute=1&loop=1&playlist=5TLM6WUDZT0&controls=0&showinfo=0"></iframe>
+  <img src="foto.jpg.jpg" class="foto">
+  <img src="filme.png" class="moldura">
+  <span class="play-text">VIDEO DE APRESENTACAO</span>
+
   </a>
 
-  <a href="https://www.facebook.com/" target="_blank">
-    <img src="facebook.png" alt="Facebook">
+  <h1>Portfólio Análise de Dados</h1>
+  <p class="nome">Seu Nome Aqui</p>
+
+  <div class="scroller">
+  <span>Dashboards profissionais • DAX • Linguagem M • Power Query • Modelagem de Dados • ETL • Python • n8n • Análise de Dados •</span>
+  </div>
+
+  </header>
+
+  <main>
+  <section class="grid grupo-a" id="grupoA"></section>
+  <section class="grid grupo-b" id="grupoB"></section>
+  </main>
+
+  
+
+  
+  </div>
+</section>
+
+
+  <footer class="social-footer">
+    <a href="https://www.linkedin.com/" target="_blank">
+      <img src="linkedin.png" alt="LinkedIn">
+    </a>
+
+    <a href="https://www.instagram.com/" target="_blank">
+      <img src="instagram.png" alt="Instagram">
+    </a>
+
+    <a href="https://www.facebook.com/" target="_blank">
+      <img src="facebook.png" alt="Facebook">
+    </a>
+
+    <a href="https://wa.me/5541987530974" target="_blank">
+    <img src="whatsapp.png">
   </a>
 
-  <a href="https://wa.me/5541987530974" target="_blank">
-  <img src="whatsapp.png">
-</a>
-
-</footer>
+  </footer>
 
 
 
-<script>
-const projetos = [
+  <script>
+  const projetos = [
 
-  { 
-    titulo:"DRE Avançada",
-    tipo:"powerbi",
-    descricao:"Dashboard financeiro com DRE dinâmica, indicadores e análise gerencial.",
-    imagem:"dre.png",
-    link:"https://app.powerbi.com/view?r=eyJrIjoiYjAwNjZhOTAtMDFmYy00OGZmLTk2MTItNGE2MzIxMDMyMmQ0IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
+    { 
+      titulo:"DRE Avançada",
+      tipo:"powerbi",
+      descricao:"Dashboard financeiro com DRE dinâmica, indicadores e análise gerencial.",
+      imagem:"dre.png",
+      link:"https://app.powerbi.com/view?r=eyJrIjoiYjAwNjZhOTAtMDFmYy00OGZmLTk2MTItNGE2MzIxMDMyMmQ0IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
+    },
+
+    {
+    titulo:"Automação Financeira (Python)",
+    tipo:"python",
+    descricao:"Script que trata planilhas, calcula indicadores e gera relatório automático.",
+    imagem:"python_dashboard.png",
+    link:"https://github.com/..."
   },
 
-  {
-  titulo:"Automação Financeira (Python)",
-  tipo:"python",
-  descricao:"Script que trata planilhas, calcula indicadores e gera relatório automático.",
-  imagem:"python_dashboard.png",
-  link:"https://github.com/..."
-},
+    {
+      titulo:"Dashboard em Excel",
+      tipo:"excel",
+      descricao:"Dashboard financeiro desenvolvido em Excel.",
+      imagem:"dreexcel.png",
+      link:"https://1drv.ms/x/c/5b956d6c894d24fb/IQAbrWH6sRiAQpBSYo6eDo2iAWX-lJkmJm_ybuEa_q3VUaE?e=XaNhea"
+    },
 
-  {
-    titulo:"Dashboard em Excel",
-    tipo:"excel",
-    descricao:"Dashboard financeiro desenvolvido em Excel.",
-    imagem:"dreexcel.png",
-    link:"https://1drv.ms/x/c/5b956d6c894d24fb/IQAbrWH6sRiAQpBSYo6eDo2iAWX-lJkmJm_ybuEa_q3VUaE?e=XaNhea"
-  },
+      {
+      titulo:"Publicidade",
+      tipo:"powerpoint",
+      descricao:"Publicidade e Propaganda.",
+      imagem:"publicidade_powerpoint.png",
+      link:"https://1drv.ms/p/c/5b956d6c894d24fb/IQC6nmaca9T-S7Bvoc9e35o4AZxgp-dhboiwnJ4CRmzakvo?e=fJ2QrJ"
+    },
 
-     {
-    titulo:"Publicidade",
-    tipo:"powerpoint",
-    descricao:"Publicidade e Propaganda.",
-    imagem:"publicidade_powerpoint.png",
-    link:"https://1drv.ms/p/c/5b956d6c894d24fb/IQC6nmaca9T-S7Bvoc9e35o4AZxgp-dhboiwnJ4CRmzakvo?e=fJ2QrJ"
-  },
-
-  {
-    titulo:"Comercial",
-    tipo:"powerbi",
-    descricao:"Análise Comercial, metas e resultados.",
-    imagem:"comercial.png",
-    link:"https://app.powerbi.com/view?r=eyJrIjoiMmE3MTk4ZmUtYmYyOS00NmRmLTg0MzgtYWU1OTY2NzU4YTI1IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
-  },
+    {
+      titulo:"Comercial",
+      tipo:"powerbi",
+      descricao:"Análise Comercial, metas e resultados.",
+      imagem:"comercial.png",
+      link:"https://app.powerbi.com/view?r=eyJrIjoiMmE3MTk4ZmUtYmYyOS00NmRmLTg0MzgtYWU1OTY2NzU4YTI1IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
+    },
 
 
-  {
-    titulo:"Recursos Humanos",
-    tipo:"powerbi",
-    descricao:"Indicadores de RH, turnover e headcount.",
-    imagem:"RH.png",
-    link:"https://app.powerbi.com/view?r=eyJrIjoiNDAzZWMwNTItZDZkZi00ODc3LTg2OWItMGJjMGIzNDlkMGIzIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
-  },
+    {
+      titulo:"Recursos Humanos",
+      tipo:"powerbi",
+      descricao:"Indicadores de RH, turnover e headcount.",
+      imagem:"RH.png",
+      link:"https://app.powerbi.com/view?r=eyJrIjoiNDAzZWMwNTItZDZkZi00ODc3LTg2OWItMGJjMGIzNDlkMGIzIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
+    },
 
-  {
-    titulo:"Pokémon",
-    tipo:"powerbi",
-    descricao:"Batalha de Poderes.",
-    imagem:"pokemon.png",
-    link:"https://app.powerbi.com/view?r=eyJrIjoiZmU2MGJkZTAtZTM3MC00MGViLWE5OWQtZjYyZTIyNWFmYjQ2IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
-  },
+    {
+      titulo:"Pokémon",
+      tipo:"powerbi",
+      descricao:"Batalha de Poderes.",
+      imagem:"pokemon.png",
+      link:"https://app.powerbi.com/view?r=eyJrIjoiZmU2MGJkZTAtZTM3MC00MGViLWE5OWQtZjYyZTIyNWFmYjQ2IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
+    },
 
-  {
-    titulo:"Vendas",
-    tipo:"powerbi",
-    descricao:"Performance e Metas.",
-    imagem:"vendas.png",
-    link:"https://app.powerbi.com/view?r=eyJrIjoiMjkyY2RiYmItZGE3Ny00M2Y0LTkyNzEtMTZhODI3OTBhMGZjIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
-  },
+    {
+      titulo:"Vendas",
+      tipo:"powerbi",
+      descricao:"Performance e Metas.",
+      imagem:"vendas.png",
+      link:"https://app.powerbi.com/view?r=eyJrIjoiMjkyY2RiYmItZGE3Ny00M2Y0LTkyNzEtMTZhODI3OTBhMGZjIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
+    },
 
-  {
-    titulo:"Análise de Combustivel",
-    tipo:"powerbi",
-    descricao:"Controle de Consumo Mês Atual x Mês Anterior.",
-    imagem:"combustivel.png",
-    link:"https://app.powerbi.com/view?r=eyJrIjoiYTQ2MjFlOTQtZGFkOS00OWJhLTlhZmItNTkxMTJlNGE0NjE2IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
-  },
+    {
+      titulo:"Análise de Combustivel",
+      tipo:"powerbi",
+      descricao:"Controle de Consumo Mês Atual x Mês Anterior.",
+      imagem:"combustivel.png",
+      link:"https://app.powerbi.com/view?r=eyJrIjoiYTQ2MjFlOTQtZGFkOS00OWJhLTlhZmItNTkxMTJlNGE0NjE2IiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
+    },
 
-  {
-    titulo:"Análise Comercial",
-    tipo:"powerbi",
-    descricao:"Análise de Vendas Mês Atual x Mês Anterior.",
-    imagem:"analisecomercial.png",
-    link:"https://app.powerbi.com/view?r=eyJrIjoiY2VhY2VlMGUtYWJlNS00MTUwLTlhMWUtZDNkZmM2ZWMzZDhhIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
-  },
+    {
+      titulo:"Análise Comercial",
+      tipo:"powerbi",
+      descricao:"Análise de Vendas Mês Atual x Mês Anterior.",
+      imagem:"analisecomercial.png",
+      link:"https://app.powerbi.com/view?r=eyJrIjoiY2VhY2VlMGUtYWJlNS00MTUwLTlhMWUtZDNkZmM2ZWMzZDhhIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
+    },
 
-  {
-    titulo:"Financeiro com DRE",
-    tipo:"powerbi",
-    descricao:"Painel financeiro focado em DRE, oferecendo visão clara.",
-    imagem:"drefinanceiro.png",
-    link:"https://app.powerbi.com/view?r=eyJrIjoiNmNmOGRmZDQtZGJiNy00MjU3LThlYjItMDY2NjYwNDIwZjllIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
+    {
+      titulo:"Financeiro com DRE",
+      tipo:"powerbi",
+      descricao:"Painel financeiro focado em DRE, oferecendo visão clara.",
+      imagem:"drefinanceiro.png",
+      link:"https://app.powerbi.com/view?r=eyJrIjoiNmNmOGRmZDQtZGJiNy00MjU3LThlYjItMDY2NjYwNDIwZjllIiwidCI6ImIwZGU5NTg3LTZiN2ItNDRjZi04ZmU4LTdlZThhNTdhMTBiZCJ9"
+    }
+
+  ];
+
+
+  const grupoA=document.getElementById("grupoA");
+  const grupoB=document.getElementById("grupoB");
+
+  projetos.slice(0,3).forEach(p=>criarCard(p,grupoA));
+  projetos.slice(3).forEach(p=>criarCard(p,grupoB));
+
+  function criarCard(p,container){
+
+  const logos = {
+    powerbi: "powerbi.png",
+    excel: "excel.png",
+    python: "python.png",
+    sql: "sql.png",
+    powerpoint: "powerpoint.png"
+  };
+
+  const logoHTML = p.tipo 
+    ? `<div class="logo-tipo"><img src="${logos[p.tipo]}"></div>` 
+    : "";
+
+  const card = document.createElement("div");
+  card.className = "card";
+
+  card.innerHTML = `
+  ${logoHTML}
+  <div class="image-box"><img src="${p.imagem}"></div>
+  <h3>${p.titulo}</h3>
+  <p>${p.descricao}</p>
+  <div class="card-footer"><a href="${p.link}" target="_blank">Abrir</a></div>
+  `;
+
+  container.appendChild(card);
   }
 
-];
+
+  const observer=new IntersectionObserver(
+  ([e])=>document.querySelector(".grupo-a").classList.toggle("recuado",e.isIntersecting),
+  {rootMargin:"-120px 0px -120px 0px",threshold:.1}
+  );
+  observer.observe(grupoB);
+
+  document.getElementById("fullscreenBtn").onclick=()=>{
+  document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+  };
+
+  const cards = document.querySelectorAll(".card");
+
+  window.addEventListener("scroll", () => {
+    const center = window.innerHeight / 2;
+
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.top + rect.height / 2;
+
+      const distance = Math.abs(center - cardCenter);
+
+      // Quanto mais longe do centro, menor fica
+      let scale = 1 - (distance / window.innerHeight) * 0.35;
+
+      // Limites de tamanho
+      scale = Math.max(0.75, Math.min(1, scale));
+
+      card.style.transform = `scale(${scale})`;
+    });
+  });
 
 
-const grupoA=document.getElementById("grupoA");
-const grupoB=document.getElementById("grupoB");
+const btnCertificados = document.querySelector(".btn-fixo-certificados");
+const modalCertificados = document.getElementById("modalCertificados");
+const fecharCertificados = document.getElementById("fecharCertificados");
 
-projetos.slice(0,3).forEach(p=>criarCard(p,grupoA));
-projetos.slice(3).forEach(p=>criarCard(p,grupoB));
+btnCertificados.addEventListener("click", () => {
+  modalCertificados.classList.add("ativo");
+});
 
-function criarCard(p,container){
+fecharCertificados.addEventListener("click", () => {
+  modalCertificados.classList.remove("ativo");
+});
 
-const logos = {
-  powerbi: "powerbi.png",
-  excel: "excel.png",
-  python: "python.png",
-  sql: "sql.png",
-  powerpoint: "powerpoint.png"
-};
-
-const logoHTML = p.tipo 
-  ? `<div class="logo-tipo"><img src="${logos[p.tipo]}"></div>` 
-  : "";
-
-const card = document.createElement("div");
-card.className = "card";
-
-card.innerHTML = `
-${logoHTML}
-<div class="image-box"><img src="${p.imagem}"></div>
-<h3>${p.titulo}</h3>
-<p>${p.descricao}</p>
-<div class="card-footer"><a href="${p.link}" target="_blank">Abrir</a></div>
-`;
-
-container.appendChild(card);
-}
+modalCertificados.addEventListener("click", (e) => {
+  if (e.target === modalCertificados) {
+    modalCertificados.classList.remove("ativo");
+  }
+});
 
 
-const observer=new IntersectionObserver(
-([e])=>document.querySelector(".grupo-a").classList.toggle("recuado",e.isIntersecting),
-{rootMargin:"-120px 0px -120px 0px",threshold:.1}
-);
-observer.observe(grupoB);
+  </script>
 
-document.getElementById("fullscreenBtn").onclick=()=>{
-document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
-};
-</script>
-
-</body>
-</html>
+  </body>
+  </html>
