@@ -61,7 +61,11 @@ header::after{
 
   main{max-width:1200px;margin:40px auto;padding:0 20px 120px}
 
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+ .grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:25px;
+}
 
 
 
@@ -374,6 +378,43 @@ header::after{
   z-index:9999;
 }
 
+.btn-voltar{
+  margin: 20px auto -40px;      /* espaço fora do botão (topo / centro / baixo) */
+  display: inline-flex;       /* faz o botão se ajustar ao conteúdo */
+  align-items: center;        /* centraliza o texto na vertical */
+  gap: 8px;                   /* espaço entre ícone e texto (se tiver) */
+  position: fixed;   /* congela na tela */
+  bottom: 20px;      /* distância do fundo */
+  left: -40px;        /* distância da esquerda */
+  z-index: 9999;     /* garante que fique acima de tudo */
+
+  padding: 10px 18px;         /* tamanho interno do botão (altura / largura) */
+  border-radius: 999px;       /* deixa o botão bem arredondado */
+
+ background: transparent; /* ⬅️ sem fundo */
+  color: #ffffff;             /* cor do texto */
+  font-weight: 600;           /* deixa o texto mais forte */
+  font-size: 14px;            /* tamanho do texto */
+
+  border: none;               /* remove borda padrão */
+  cursor: pointer;            /* vira “mãozinha” ao passar o mouse */
+
+  box-shadow: none; /* ⬅️ sem sombra */
+  transition: all .25s ease;  /* anima suavemente qualquer mudança */
+}
+
+.btn-voltar:hover{
+  transform: translateY(-2px); /* botão sobe levemente */
+  box-shadow: 0 10px 30px rgba(0,0,0,.25); /* sombra mais forte */
+  filter: brightness(1.1);     /* deixa o botão um pouco mais claro */
+}
+
+.btn-voltar img{
+  width: 200px;   /* tamanho da imagem */
+  height: 200px;  /* mantém proporção */
+}
+
+
 /* imagem do botão */
 .btn-fixo-certificados img{
   width:150px;          /* ⬅ tamanho do botão */
@@ -412,13 +453,21 @@ html{
 /* conteúdo do modal */
 .modal-conteudo{
   background:#020617;
-  padding:30px;
+  padding:20px;
   border-radius:16px;
-  max-width:420px;
+
   width:90%;
+  max-width:900px;          /* ⬅ MAIS LARGO */
+  max-height:90vh;          /* ⬅ NÃO PASSA DA TELA */
+
   box-shadow:0 0 40px rgba(0,0,0,.6);
   text-align:center;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
+
 
 /* botão fechar */
 .fechar-modal{
@@ -429,6 +478,57 @@ html{
   font-size:20px;
   color:#93c5fd;
 }
+
+#viewerPDF{
+  width:100%;
+  height:8h; /* ocupa quase a tela toda */
+  border:none;
+  border-radius:14px;
+  background:#020617;
+}
+
+
+
+.lista-certificados{
+  list-style:none;
+  padding:0;
+  margin-top:20px;
+}
+
+.lista-certificados li{
+  margin-bottom:12px;
+}
+
+.lista-certificados a{
+  display:block;
+  padding:12px 16px;
+  border-radius:10px;
+  background:#020617;
+  color:#93c5fd;
+  text-decoration:none;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .25s ease;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.lista-certificados a:hover{
+  background:#1e40af;
+  color:#ffffff;
+  transform:translateY(-2px);
+  box-shadow:0 0 12px rgba(59,130,246,.6);
+}
+
+#viewerCertificado{
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  display: none;
+}
+
+
+
 
 
 
@@ -445,21 +545,12 @@ html{
   </button>
 
   <!-- MODAL CERTIFICADOS -->
-  <div class="modal-certificados" id="modalCertificados">
-    <div class="modal-conteudo">
-      <span class="fechar-modal" id="fecharCertificados">✕</span>
-
-      <h2>📜 Certificados</h2>
-      <ul class="lista-certificados">
-        <li><a href="certificados/fundamentos-dax.pdf" target="_blank">Fundamentos DAX</a></li>
-        <li><a href="certificados/power-bi-pro.pdf" target="_blank">Power BI Profissional</a></li>
-        <li><a href="certificados/python-analise-dados.pdf" target="_blank">Python para Análise de Dados</a></li>
-      </ul>
-    </div>
+<div class="modal-certificados" id="modalCertificados">
+  <div class="modal-conteudo">
+    <span class="fechar-modal" id="fecharCertificados">✕</span>
+    <!-- a imagem será criada via JS -->
   </div>
-
-
-
+</div>
 
 
 
@@ -493,7 +584,17 @@ html{
   <section class="grid grupo-b" id="grupoB"></section>
   </main>
 
-  
+<section class="certificados" id="secaoCertificados" style="display:none;">
+ 
+
+<button id="voltarProjetos" class="btn-voltar">
+  <img src="voltar.png" alt="Voltar">
+</button>
+
+
+  <div class="grid" id="gridCertificados"></div>
+</section>
+
 
   
   </div>
@@ -615,9 +716,53 @@ html{
 
   ];
 
+const certificados = [
+  { titulo: "Fundamentos DAX", imagem: "certificados/fundamentos-dax.png" },
+  { titulo: "Design de Dashboards", imagem: "certificados/Design-de-Dashboards.png" },
+  { titulo: "Primeiros passos com Python", imagem: "certificados/Primeiros-passos-com-Python.png" }
+];
 
-  const grupoA=document.getElementById("grupoA");
-  const grupoB=document.getElementById("grupoB");
+function renderizarCertificados() {
+  const gridCertificados = document.getElementById("gridCertificados");
+  const modal = document.getElementById("modalCertificados");
+  const viewerCertificado = document.getElementById("viewerCertificado");
+
+  gridCertificados.innerHTML = "";
+
+  certificados.forEach(cert => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.cursor = "pointer";
+
+    card.innerHTML = `
+      <h3>${cert.titulo}</h3>
+      <p>Clique para visualizar</p>
+    `;
+
+    card.addEventListener("click", () => {
+  const container = document.querySelector(".modal-conteudo");
+
+  // remove imagem antiga (se existir)
+  const imgAntiga = document.getElementById("viewerCertificado");
+  if (imgAntiga) imgAntiga.remove();
+
+  // cria nova imagem SEM reaproveitar
+  const novaImg = document.createElement("img");
+  novaImg.id = "viewerCertificado";
+  novaImg.src = cert.imagem; // 🔑 CORRETO
+  novaImg.style.display = "block";
+
+  container.appendChild(novaImg);
+
+  modal.classList.add("ativo");
+});
+
+
+
+    gridCertificados.appendChild(card);
+  });
+}
+
 
   projetos.slice(0,3).forEach(p=>criarCard(p,grupoA));
   projetos.slice(3).forEach(p=>criarCard(p,grupoB));
@@ -684,22 +829,69 @@ html{
 
 
 const btnCertificados = document.querySelector(".btn-fixo-certificados");
+const secaoCertificados = document.getElementById("secaoCertificados");
+const btnVoltar = document.getElementById("voltarProjetos");
+const mainProjetos = document.querySelector("main");
+
+// 👉 ABRIR CERTIFICADOS
+btnCertificados.addEventListener("click", () => {
+
+  // esconder projetos
+  document.getElementById("grupoA").style.display = "none";
+  document.getElementById("grupoB").style.display = "none";
+
+  // mostrar certificados
+  secaoCertificados.style.display = "block";
+
+  // renderizar os cards
+  renderizarCertificados();
+
+  // rolar para o topo
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+
+btnVoltar.addEventListener("click", () => {
+
+  // esconder certificados
+  secaoCertificados.style.display = "none";
+
+  // mostrar projetos novamente
+  document.getElementById("grupoA").style.display = "grid";
+  document.getElementById("grupoB").style.display = "grid";
+
+  // rolar para o topo
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+
 const modalCertificados = document.getElementById("modalCertificados");
 const fecharCertificados = document.getElementById("fecharCertificados");
+const viewerCertificado = document.getElementById("viewerCertificado");
 
-btnCertificados.addEventListener("click", () => {
-  modalCertificados.classList.add("ativo");
-});
 
+
+
+
+// fechar modal no X
 fecharCertificados.addEventListener("click", () => {
   modalCertificados.classList.remove("ativo");
+
+  viewerCertificado.src = "";          // 🔑 limpa a imagem
+  viewerCertificado.style.display = "none";
 });
 
+// fechar clicando fora
 modalCertificados.addEventListener("click", (e) => {
   if (e.target === modalCertificados) {
     modalCertificados.classList.remove("ativo");
+
+    viewerCertificado.src = "";        // 🔑 limpa a imagem
+    viewerCertificado.style.display = "none";
   }
 });
+
+
 
 
   </script>
