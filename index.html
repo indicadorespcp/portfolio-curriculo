@@ -17,14 +17,17 @@
   color:#e5e7eb;
   }
 
- header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  padding:30px 20px;
-  text-align:center;
-  background:linear-gradient(135deg,#2563eb,#1e40af);
+header{
+  position: sticky;       /* mantém a barra presa no topo */
+  top: 0;
+  z-index: 1000;
+
+  padding: 30px 20px;
+  text-align: center;
+
+  background: linear-gradient(135deg,#2563eb,#1e40af);
 }
+
 
 /* LINHA ELEGANTE DO HEADER */
 header::after{
@@ -59,18 +62,30 @@ header::after{
   100%{transform:translateX(-100%)}
   }
 
-  main{max-width:1200px;margin:40px auto;padding:0 20px 120px}
 
- .grid{
+
+.grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns:repeat(4, 360px); /* 🔑 largura fixa e elegante */
+  justify-content:center;                /* 🔑 CENTRALIZA DE VERDADE */
   gap:25px;
+  max-width:1600px;
+  margin:60px auto 120px;
+  padding:0 20px;
 }
 
 
+@media (max-width:1400px){
+  .grid{grid-template-columns:repeat(3,1fr);}
+}
+@media (max-width:1000px){
+  .grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:600px){
+  .grid{grid-template-columns:1fr;}
+}
 
-  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+
 
   .card{
   position:relative;
@@ -367,16 +382,25 @@ header::after{
   flex-wrap:wrap;
 }
 
-/* botão fixo de certificados */
+
 .btn-fixo-certificados{
-  position:fixed;
-  right:-10px;
-  bottom:30px;
-  background:transparent;
-  border:none;
-  cursor:pointer;
-  z-index:9999;
+  position: absolute;
+  bottom: -57px;      /* sobe ou desce */
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 20;
 }
+
+.btn-fixo-certificados img{
+  width: 60px;       /* tamanho do ícone */
+  height: auto;
+}
+
 
 .btn-voltar{
   margin: 20px auto -40px;      /* espaço fora do botão (topo / centro / baixo) */
@@ -527,7 +551,20 @@ html{
   display: none;
 }
 
+/* esconder botões quando certificado estiver aberto */
+body.certificado-aberto #fullscreenBtn,
+body.certificado-aberto .btn-fixo-certificados,
+body.certificado-aberto .btn-voltar {
+  display: none !important;
+}
 
+
+/* quando certificado estiver aberto */
+body.certificado-aberto .btn-fixo-certificados,
+body.certificado-aberto #voltarProjetos,
+body.certificado-aberto #fullscreenBtn {
+  display: none;
+}
 
 
 
@@ -540,9 +577,7 @@ html{
   <!-- BOTÕES -->
   <button id="fullscreenBtn">⛶</button>
 
-  <button class="btn-fixo-certificados">
-    <img src="certificados.png" alt="Certificados">
-  </button>
+
 
   <!-- MODAL CERTIFICADOS -->
 <div class="modal-certificados" id="modalCertificados">
@@ -577,11 +612,16 @@ html{
   <span>Dashboards profissionais • DAX • Linguagem M • Power Query • Modelagem de Dados • ETL • Python • n8n • Análise de Dados •</span>
   </div>
 
+  <button class="btn-fixo-certificados">
+  <img src="certificados.png" alt="Certificados">
+</button>
+
+
   </header>
 
   <main>
-  <section class="grid grupo-a" id="grupoA"></section>
-  <section class="grid grupo-b" id="grupoB"></section>
+  <section class="grid" id="gridProjetos"></section>
+
   </main>
 
 <section class="certificados" id="secaoCertificados" style="display:none;">
@@ -739,24 +779,26 @@ function renderizarCertificados() {
       <p>Clique para visualizar</p>
     `;
 
-    card.addEventListener("click", () => {
+card.addEventListener("click", () => {
   const container = document.querySelector(".modal-conteudo");
 
   // remove imagem antiga (se existir)
   const imgAntiga = document.getElementById("viewerCertificado");
   if (imgAntiga) imgAntiga.remove();
 
-  // cria nova imagem SEM reaproveitar
+  // cria nova imagem
   const novaImg = document.createElement("img");
   novaImg.id = "viewerCertificado";
-  novaImg.src = cert.imagem; // 🔑 CORRETO
+  novaImg.src = cert.imagem;
   novaImg.style.display = "block";
 
   container.appendChild(novaImg);
 
+  // 🔑 ESCONDE OS BOTÕES
+  document.body.classList.add("certificado-aberto");
+
   modal.classList.add("ativo");
 });
-
 
 
     gridCertificados.appendChild(card);
@@ -764,8 +806,9 @@ function renderizarCertificados() {
 }
 
 
-  projetos.slice(0,3).forEach(p=>criarCard(p,grupoA));
-  projetos.slice(3).forEach(p=>criarCard(p,grupoB));
+ const gridProjetos = document.getElementById("gridProjetos");
+projetos.forEach(p => criarCard(p, gridProjetos));
+
 
   function criarCard(p,container){
 
@@ -796,11 +839,6 @@ function renderizarCertificados() {
   }
 
 
-  const observer=new IntersectionObserver(
-  ([e])=>document.querySelector(".grupo-a").classList.toggle("recuado",e.isIntersecting),
-  {rootMargin:"-120px 0px -120px 0px",threshold:.1}
-  );
-  observer.observe(grupoB);
 
   document.getElementById("fullscreenBtn").onclick=()=>{
   document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
@@ -823,7 +861,8 @@ function renderizarCertificados() {
       // Limites de tamanho
       scale = Math.max(0.75, Math.min(1, scale));
 
-      card.style.transform = `scale(${scale})`;
+      card.style.transform = `translateY(-4px) scale(${scale})`;
+
     });
   });
 
@@ -836,9 +875,8 @@ const mainProjetos = document.querySelector("main");
 // 👉 ABRIR CERTIFICADOS
 btnCertificados.addEventListener("click", () => {
 
-  // esconder projetos
-  document.getElementById("grupoA").style.display = "none";
-  document.getElementById("grupoB").style.display = "none";
+  // esconder grid de projetos (AGORA É UM SÓ)
+  document.getElementById("gridProjetos").style.display = "none";
 
   // mostrar certificados
   secaoCertificados.style.display = "block";
@@ -851,23 +889,23 @@ btnCertificados.addEventListener("click", () => {
 });
 
 
+
 btnVoltar.addEventListener("click", () => {
 
   // esconder certificados
   secaoCertificados.style.display = "none";
 
-  // mostrar projetos novamente
-  document.getElementById("grupoA").style.display = "grid";
-  document.getElementById("grupoB").style.display = "grid";
+  // mostrar grid de projetos novamente
+  document.getElementById("gridProjetos").style.display = "grid";
 
   // rolar para o topo
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 
+
 const modalCertificados = document.getElementById("modalCertificados");
 const fecharCertificados = document.getElementById("fecharCertificados");
-const viewerCertificado = document.getElementById("viewerCertificado");
 
 
 
@@ -877,19 +915,26 @@ const viewerCertificado = document.getElementById("viewerCertificado");
 fecharCertificados.addEventListener("click", () => {
   modalCertificados.classList.remove("ativo");
 
-  viewerCertificado.src = "";          // 🔑 limpa a imagem
-  viewerCertificado.style.display = "none";
+  // remove classe que escondia botões
+  document.body.classList.remove("certificado-aberto");
+
+  // remove a imagem atual
+  const img = document.getElementById("viewerCertificado");
+  if (img) img.remove();
 });
 
-// fechar clicando fora
+// fechar clicando fora do modal
 modalCertificados.addEventListener("click", (e) => {
   if (e.target === modalCertificados) {
     modalCertificados.classList.remove("ativo");
 
-    viewerCertificado.src = "";        // 🔑 limpa a imagem
-    viewerCertificado.style.display = "none";
+    document.body.classList.remove("certificado-aberto");
+
+    const img = document.getElementById("viewerCertificado");
+    if (img) img.remove();
   }
 });
+
 
 
 
